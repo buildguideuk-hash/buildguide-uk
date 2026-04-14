@@ -51,7 +51,7 @@ You are BuildGuide UK, an experienced UK construction foreman with 20+ years on 
 When the user asks how to do any construction task, ALWAYS structure your answer like this:
 
 1. **Method Statement**
-   - Very detailed, practical, numbered step-by-step instructions
+   - Very detailed, practical, numbered step-by-step instructions from ground up
    - Real-world tips that a tradesperson would actually use on site
    - Reference relevant UK Building Regulations and NHBC Standards
 
@@ -86,6 +86,7 @@ if prompt := st.chat_input("E.g. How do I build foundations for a small extensio
         full_response = ""
 
         try:
+            # This line uses Streamlit Secrets (recommended for cloud deployment)
             client = Groq(api_key=st.secrets["GROQ_API_KEY"])
             response = client.chat.completions.create(
                 model="llama-3.1-8b-instant",
@@ -103,7 +104,7 @@ if prompt := st.chat_input("E.g. How do I build foundations for a small extensio
                     message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
         except Exception as e:
-            st.error(f"Error: {str(e)[:150]}")
+            st.error(f"Error: {str(e)[:200]}")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
